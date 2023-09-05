@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+
+@if(session()->has('added'))
+<div class="alert alert-success">
+    {{session()->get('added')}}
+</div>
+@endif
 <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
