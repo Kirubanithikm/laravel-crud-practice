@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\employee;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -28,11 +28,20 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:employees,email|email',
+            'phone' => 'required|numeric|unique:employees,phone',
+            'joining_date', 'required',
+            'salary' => 'required'
+        ]);
+
         $data = $request->except('_token');
 
-        employee::create($data);
+        Employee::create($data);
 
-        // $employee = new employee;
+        // $employee = new Employee;
         // $employee->name = $data['name'];
         // $employee->email = $data['email'];
         // $employee->phone = $data['phone'];
@@ -40,7 +49,8 @@ class EmployeeController extends Controller
         // $employee->salary = $data['salary'];
         // $employee->is_active = $data['is_active'];
         // $employee->save();
-        dd('success');
+
+        return redirect()->route('employee.index')->withAdded('Employee has been created');
     }
 
     /**
