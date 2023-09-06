@@ -25,33 +25,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($employees as $key => $employee)
                         <tr>
-                            <td>1</td>
-                            <td>Logesh</td>
-                            <td>logesh@jvlcode.com</td>
-                            <td>2023-5-12 </td>
-                            <td><span type="button" class="btn btn-success btn-xs py-0">Active</span></td>
+                            <td>{{$key+1}}</td>
+                            <td>{{$employee->name}}</td>
+                            <td>{{$employee->email}}</td>
+                            <td>{{$employee->joining_date}}</td>
+                            <td><span type="button" class="btn {{$employee->is_active == '1' ? 'btn-success' : 'btn-danger'}} btn-xs py-0">{{$employee->is_active == '1' ? 'Active' : 'Inactive'}}</span></td>
                             <td>
-                                <a href="/employee/1" class="btn btn-primary btn-xs py-0">Show</a>
-                                <a href="/employee/1/edit" class="btn btn-warning btn-xs py-0">Edit</a>
+                                <a href="{{route('employee.show',$employee->id)}}" class="btn btn-primary btn-xs py-0">Show</a>
+                                <a href="{{route('employee.edit',$employee->id)}}" class="btn btn-warning btn-xs py-0">Edit</a>
                                 <button type="submit" class="btn btn-danger btn-xs py-0">Delete</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>David</td>
-                            <td>david@jvlcode.com</td>
-                            <td>2022-7-21 </td>
-                            <td><span type="button" class="btn btn-success btn-xs py-0">Active</span></td>
-                            <td>
-                                <a href="/employee/2" class="btn btn-primary btn-xs py-0">Show</a>
-                                <a href="/employee/2/edit" class="btn btn-warning btn-xs py-0">Edit</a>
-                                <button type="submit" class="btn btn-danger btn-xs py-0">Delete</button>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
