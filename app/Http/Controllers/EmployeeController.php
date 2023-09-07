@@ -78,7 +78,6 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         $updated_data = $request->all();
         $employee = Employee::find($id);
 
