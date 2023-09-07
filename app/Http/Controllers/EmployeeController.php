@@ -69,7 +69,8 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        return view('edit');
+        $employee = Employee::find($id);
+        return view('edit', ['employee' => $employee]);
     }
 
     /**
@@ -77,7 +78,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $updated_data = $request->all();
+        $employee = Employee::find($id);
+
+        $employee->update($updated_data);
+        return redirect()->route('employee.edit',$employee->id)
+        ->withSuccess('Employee details updated successfully');
     }
 
     /**
