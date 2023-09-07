@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-@if(session()->has('added'))
+@if(session()->has('success'))
 <div class="alert alert-success">
-    {{session()->get('added')}}
+    {{session()->get('success')}}
 </div>
 @endif
 <div class="row">
@@ -33,9 +33,15 @@
                             <td>{{$employee->joining_date}}</td>
                             <td><span type="button" class="btn {{$employee->is_active == '1' ? 'btn-success' : 'btn-danger'}} btn-xs py-0">{{$employee->is_active == '1' ? 'Active' : 'Inactive'}}</span></td>
                             <td>
-                                <a href="{{route('employee.show',$employee->id)}}" class="btn btn-primary btn-xs py-0">Show</a>
-                                <a href="{{route('employee.edit',$employee->id)}}" class="btn btn-warning btn-xs py-0">Edit</a>
-                                <button type="submit" class="btn btn-danger btn-xs py-0">Delete</button>
+                                <div class="d-flex">
+                                    <a href="{{route('employee.show',$employee->id)}}" class="btn btn-primary btn-xs py-0 mx-1">Show</a>
+                                    <a href="{{route('employee.edit',$employee->id)}}" class="btn btn-warning btn-xs py-0 mx-1">Edit</a>
+                                    <form action="{{route('employee.destroy',$employee->id)}}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-xs py-0">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
