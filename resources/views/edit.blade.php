@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
-@if(session()->has('success'))
+@if(session()->has('updated'))
 <div class="alert alert-success">
-    {{session()->get('success')}}
+    {{session()->get('updated')}}
 </div>
 @endif
 
+<a class="text-light" href="{{route('employee.index')}}">Back to List</a>
 <div class="card">
     <div class="card-body">
         <p style="font-size:20px; font-weight:bold;">Update Employee</p>
